@@ -77,7 +77,7 @@ set.completeopt = 'menuone,noinsert,noselect'
 set.undodir = os.getenv 'HOME' .. '/.config/nvim/.undodir'
 set.undofile = true
 
--- enable mouse
+-- Enable mouse mode, can be useful for resizing splits for example!
 set.mouse = 'a'
 
 -- highlight search
@@ -102,6 +102,7 @@ set.showmode = false
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 -- set.list = true
+-- set.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 -- set.listchars = { tab = '▎', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
