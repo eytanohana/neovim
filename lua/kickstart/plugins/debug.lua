@@ -31,6 +31,7 @@ return {
     return {
       -- Basic debugging keymaps, feel free to change to your liking!
       { '<F9>', dap.continue, desc = 'Debug: Start/Continue' },
+      { '<leader>rt', dap.continue, desc = 'Debug: Start/Continue' },
       { '<F7>', dap.step_into, desc = 'Debug: Step Into' },
       { '<F8>', dap.step_over, desc = 'Debug: Step Over' },
       { '<S-F7>', dap.step_out, desc = 'Debug: Step Out' },
@@ -51,6 +52,9 @@ return {
     local dap = require 'dap'
     local dapui = require 'dapui'
 
+    ------------------------------------------------------------------------------
+    -- Mason-nvim-dap Setup
+    ------------------------------------------------------------------------------
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
@@ -64,12 +68,14 @@ return {
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
-        'delve',
+        'delve', -- for go
+        'codelldb', -- for rust
       },
     }
 
-    -- Dap UI setup
-    -- For more information, see |:help nvim-dap-ui|
+    ------------------------------------------------------------------------------
+    -- DAP UI Configuration          For more information, see |:help nvim-dap-ui|
+    ------------------------------------------------------------------------------
     dapui.setup {
       -- Set icons to characters that are more likely to work in every terminal.
       --    Feel free to remove or use ones that you like more! :)
@@ -77,37 +83,110 @@ return {
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
       controls = {
         icons = {
-          pause = '⏸',
           play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
+          pause = '⏸',
           terminate = '⏹',
-          disconnect = '⏏',
+          step_into = '',
+          step_over = '',
+          step_out = '',
+          step_back = '',
+          run_last = '',
+          disconnect = '',
+        },
+      },
+
+      layouts = {
+        {
+          elements = {
+            {
+              id = 'scopes',
+              size = 0.25,
+            },
+            {
+              id = 'breakpoints',
+              size = 0.25,
+            },
+            {
+              id = 'stacks',
+              size = 0.25,
+            },
+            {
+              id = 'watches',
+              size = 0.25,
+            },
+          },
+          position = 'right',
+          size = 40,
+        },
+        {
+          elements = { {
+            id = 'repl',
+            size = 0.5,
+          }, {
+            id = 'console',
+            size = 0.5,
+          } },
+          position = 'bottom',
+          size = 10,
         },
       },
     }
 
-    -- Change breakpoint icons
-    -- vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
-    -- vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
-    -- local breakpoint_icons = vim.g.have_nerd_font
-    --     and { Breakpoint = '', BreakpointCondition = '', BreakpointRejected = '', LogPoint = '', Stopped = '' }
-    --   or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
-    -- for type, icon in pairs(breakpoint_icons) do
-    --   local tp = 'Dap' .. type
-    --   local hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'
-    --   vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
-    -- end
+    ------------------------------------------------------------------------------
+    -- Define Highlight Groups and Breakpoint Icons
+    ------------------------------------------------------------------------------
+    vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
+    vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
+    local breakpoint_icons = vim.g.have_nerd_font
+        and { Breakpoint = '', BreakpointCondition = '', BreakpointRejected = '', LogPoint = '', Stopped = '' }
+      or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
+    for type, icon in pairs(breakpoint_icons) do
+      local tp = 'Dap' .. type
+      local hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'
+      vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
+    end
 
+    ------------------------------------------------------------------------------
+    -- Set DAP Event Listeners to Toggle DAP UI Automatically
+    ------------------------------------------------------------------------------
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+    -- dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+    ------------------------------------------------------------------------------
+    -- Language-Specific Debugger Configurations
+    ------------------------------------------------------------------------------
+
+    -- Rust: Debug configuration using CodeLLDB (only used for Rust files)
+    dap.configurations.rust = {
+      {
+        name = 'Launch Rust Executable',
+        type = 'codelldb',
+        request = 'launch',
+        program = function()
+          local cwd = vim.fn.getcwd()
+          local projectName = vim.fn.fnamemodify(cwd, ':t')
+
+          -- Run Cargo build and capture the output
+          local build_output = vim.fn.system 'cargo build'
+          if vim.v.shell_error ~= 0 then
+            print('Build failed:\n' .. build_output)
+            return nil -- Abort debugging if build fails
+          else
+            print 'Build succeeded!'
+          end
+
+          local default_exec = cwd .. '/target/debug/' .. projectName
+          return vim.fn.input('Path to executable: ', default_exec, 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+      },
+    }
 
     -- Install golang specific config
     require('dap-python').setup '~/.config/nvim/.virtualenv/debugpy/bin/python'
+
     require('dap-go').setup {
       delve = {
         -- On Windows delve must be run attached or it crashes.
