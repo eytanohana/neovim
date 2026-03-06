@@ -70,7 +70,7 @@ set.magic = true
 -- visual block stays in its lane
 set.startofline = false
 
--- better menu completion/selection
+-- Completion menu: menuone, noinsert, noselect. nvim-cmp may override with menu, menuone, noinsert; see plugins/completion.lua.
 set.completeopt = 'menuone,noinsert,noselect'
 
 -- set undotree file directory

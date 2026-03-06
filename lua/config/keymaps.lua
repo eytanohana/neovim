@@ -87,8 +87,8 @@ map('n', 'cd', ':CP<CR>') -- todo: add CP
 --  See `:help hlsearch`
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- toggle relative line numbers
-map('n', '<leader>rn', ':set relativenumber!<CR>') --todo: clashes with rename?
+-- Toggle relative line numbers. In LSP buffers, <leader>rn is buffer-local LSP rename; this global binding applies elsewhere.
+map('n', '<leader>rn', ':set relativenumber!<CR>')
 
 -- split navigations (M is Alt)
 map('n', '<A-j>', '<C-W>j')
