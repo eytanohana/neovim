@@ -29,7 +29,8 @@ return {
         end,
         desc = 'Debug: Set Breakpoint',
       },
-      { '<F6>', dapui.toggle, desc = 'Debug: See last session result.' },
+      { '<F6>', dapui.toggle, desc = 'Debug: Toggle DAP UI' },
+      { '<leader>du', dapui.toggle, desc = '[D]ebug: Toggle DAP [U]I' },
       unpack(keys),
     }
   end,
