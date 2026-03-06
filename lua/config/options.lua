@@ -92,7 +92,7 @@ set.hlsearch = true
 set.updatetime = 250
 set.timeoutlen = 300
 
-set.signcolumn = 'auto'
+set.signcolumn = 'yes'
 
 -- more terminal colors
 set.termguicolors = true
