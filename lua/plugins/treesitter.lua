@@ -18,7 +18,7 @@ return {
       'vimdoc',
       'python',
     }
-    require('nvim-treesitter').install(parsers)
+    require('nvim-treesitter.install').ensure_installed(parsers)
     vim.api.nvim_create_autocmd('FileType', {
       callback = function(args)
         local buf, filetype = args.buf, args.match
