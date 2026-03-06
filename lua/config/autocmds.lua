@@ -15,23 +15,6 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
   group = general,
 })
 
-vim.api.nvim_create_autocmd('BufLeave', {
-  group = general,
-  callback = function()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local filename = vim.api.nvim_buf_get_name(bufnr)
-
-    local is_modified = vim.bo[bufnr].modified
-    local readable = vim.fn.filereadable(filename) == 1
-    local writable = vim.fn.filewritable(filename) == 1
-
-    -- Save the buffer if it's a real file, not related to plugins, and is modified
-    if readable and writable and is_modified then
-      vim.cmd 'write'
-    end
-  end,
-})
-
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
