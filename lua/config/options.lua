@@ -10,7 +10,6 @@ set.showtabline = 2
 
 -- be smart when using tabs ;)
 set.smarttab = true
-set.smartindent = true
 
 -- expand tabs into spaces
 set.expandtab = true
