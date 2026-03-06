@@ -1,5 +1,7 @@
 # Neovim configuration modernization plan
 
+**Status:** Plan objectives completed on branch `nvim-0.11-modernization` (native LSP, blink.cmp, treesitter folding, deprecated API fixes, dead file removal). This document remains as the audit and step-by-step reference.
+
 This document is the single source of truth for refactoring this config: audit, problems, target layout, and step-by-step plan. All code changes are made only on branch `neovim-refactor`, with small, reviewable commits.
 
 ---
