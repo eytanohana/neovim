@@ -62,10 +62,10 @@ return { -- Autocompletion
         ['<C-j>'] = cmp.mapping.select_next_item(),
         ['<C-k>'] = cmp.mapping.select_prev_item(),
 
-        -- Manually trigger a completion from nvim-cmp.
-        --  Generally you don't need this, because nvim-cmp will display
-        --  completions whenever it has completion options available.
-        ['<C-Tab>'] = cmp.mapping.complete {},
+        -- Manually trigger completion. <C-Space> is used because many terminals
+        -- capture <C-Tab> for switching tabs, so it never reaches Neovim.
+        ['<C-Space>'] = cmp.mapping.complete {},
+        ['<C-Tab>'] = cmp.mapping.complete {}, -- may be captured by terminal
 
         -- Think of <c-l> as moving to the right of your snippet expansion.
         --  So if you have a snippet that's like:
