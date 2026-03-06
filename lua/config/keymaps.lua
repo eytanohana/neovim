@@ -90,12 +90,6 @@ map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- toggle relative line numbers
 map('n', '<leader>rn', ':set relativenumber!<CR>') --todo: clashes with rename?
 
--- -- tab shortcuts
--- keys.nmap('<leader>tn', ':tabnew<space>', nosilent)
-
--- move focused split to new tab
--- keys.nmap('<leader>st', '<C-w>T')
-
 -- split navigations (M is Alt)
 map('n', '<A-j>', '<C-W>j')
 map('n', '<A-k>', '<C-W>k')
@@ -115,58 +109,14 @@ map('n', '<C-A-S-J>', ':resize -3<CR>')
 map('n', '<A-i>', 'gT')
 map('n', '<A-o>', 'gt')
 
--- -- swap split windows
--- keys.nmap('<leader>sr', '<C-w>r')
--- -- close all splits except the focused one
--- keys.nmap('<leader>sc', '<C-w>o')
--- -- resize all splits equally
--- keys.nmap('<leader>s=', '<C-w>=')
--- -- resize split width to max
--- keys.nmap('<leader>s\\', '<C-w>|')
--- -- resize split height to max
--- keys.nmap('<leader>s-', '<C-w>_')
-
 -- reformat jsons
 map('n', '\\j', ':%!python -m json.tool<CR>')
-
--- -- change word then use . to jump
--- -- to next/prev and change the word
--- keys.nmap('cn', '*``cgn')
--- keys.nmap('cN', '*``cgN')
-
--- -- undo tree
--- keys.nmap('<leader>u', ':UndotreeToggle<CR>')
 
 -- dont copy pasted over text
 map('v', 'p', '"_dP')
 
 -- exit v mode with nn
 map('v', 'nn', '<ESC>')
-
--- -- jump to last opened file
--- keys.nmap('<C-b>', '<C-^>')
---
--- -- operator remaps -- next/last (),[],{},<>
--- for _, symbol in ipairs({ '(', '[', '{', '<' }) do
---     keys.omap('in'..symbol, ':<c-u>normal! f'..symbol..'vi'..symbol..'<CR>')
---     keys.omap('il'..symbol, ':<c-u>normal! F'..symbol..'vi'..symbol..'<CR>')
---     keys.omap('an'..symbol, ':<c-u>normal! f'..symbol..'va'..symbol..'<CR>')
---     keys.omap('al'..symbol, ':<c-u>normal! F'..symbol..'va'..symbol..'<CR>')
--- end
---
--- for _, symbol in ipairs({ 'i', 'a' }) do
---     -- shortcut fot next/last ()
---     keys.omap(symbol..'nb', ':<c-u>normal! f(v'..symbol..'(<CR>')
---     keys.omap(symbol..'lb', ':<c-u>normal! F(v'..symbol..'(<CR>')
---     -- shortcut for next/last {}
---     keys.omap(symbol..'nB', ':<c-u>normal! f{v'..symbol..'{<CR>')
---     keys.omap(symbol..'lB', ':<c-u>normal! F{v'..symbol..'{<CR>')
---     -- next/last paragraph
---     keys.omap(symbol..'np', ':<c-u>normal! }}kv'..symbol..'p<CR>')
---     keys.omap(symbol..'lp', ':<c-u>normal! {{jv'..symbol..'p<CR>')
---     keys.nmap('v'..symbol..'np', '}}kv'..symbol..'p')
---     keys.nmap('v'..symbol..'lp', '{{jv'..symbol..'p')
--- end
 
 --- ppp to paste in insert mode
 map('i', 'ppp', '<ESC>p')

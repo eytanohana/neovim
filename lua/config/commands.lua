@@ -8,4 +8,3 @@ vim.api.nvim_create_user_command('CP',
         vim.fn.setreg("+", path)
         vim.notify('Copied "' .. path .. '" to clipboard.')
     end, {})
-

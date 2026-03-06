@@ -46,16 +46,16 @@ local plugins, opts = require 'config.lazy'
 require('lazy').setup(plugins, opts)
 
 -- [[ Options ]]
-require 'custom.options'
+require 'config.options'
 
 -- [[ Keymaps ]]
-require 'custom.keymaps'
+require 'config.keymaps'
 
 -- [[ Commands ]]
-require 'custom.commands'
+require 'config.commands'
 
 -- [[ Autocommands ]]
-require 'custom.aucommands'
+require 'config.aucommands'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
