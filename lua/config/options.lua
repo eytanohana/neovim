@@ -54,8 +54,10 @@ set.scrolloff = 2
 set.splitbelow = true
 set.splitright = true
 
--- Enable folding
-set.foldmethod = 'indent'
+-- Enable folding (treesitter-based in 0.11+ for structure-aware folds)
+set.foldmethod = 'expr'
+set.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+set.foldtext = ''
 set.foldlevel = 99
 
 -- dont autowrap long lines
@@ -70,7 +72,7 @@ set.magic = true
 -- visual block stays in its lane
 set.startofline = false
 
--- Completion menu: menuone, noinsert, noselect. nvim-cmp may override with menu, menuone, noinsert; see plugins/completion.lua.
+-- Completion menu: menuone, noinsert, noselect (blink.cmp may adjust; see plugins/completion.lua).
 set.completeopt = 'menuone,noinsert,noselect'
 
 -- set undotree file directory
