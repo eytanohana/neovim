@@ -113,7 +113,10 @@ return {
       },
     }
 
-    require('dap-python').setup '~/.config/nvim/.virtualenv/debugpy/bin/python'
+    -- debugpy lives outside the config repo; provision it with:
+    --   python -m venv ~/.local/share/nvim/debugpy && ~/.local/share/nvim/debugpy/bin/pip install debugpy
+    local debugpy_python = vim.fn.stdpath 'data' .. '/debugpy/bin/python'
+    require('dap-python').setup(debugpy_python)
     require('dap-go').setup {
       delve = { detached = vim.fn.has 'win32' == 0 },
     }
