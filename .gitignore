@@ -2,6 +2,7 @@ tags
 test.sh
 .luarc.json
 nvim
+nvim_refactor_cursor_plan.md
 
 spell/
 .undodir/
@@ -9,3 +10,4 @@ spell/
 
 .idea/
 .DS_Store
+*.spl
