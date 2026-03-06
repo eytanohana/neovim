@@ -6,6 +6,8 @@ local runtime_lua = (runtime and runtime ~= '')
     and vim.fn.fnamemodify(runtime .. '/lua', ':p')
   or nil
 return {
+  cmd = { 'lua-language-server' },
+  filetypes = { 'lua' },
   capabilities = capabilities,
   settings = {
     Lua = {
