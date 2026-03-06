@@ -2,12 +2,9 @@ local map = vim.keymap.set
 local toggle_term_group = vim.api.nvim_create_augroup('toggle_term', { clear = true })
 
 local function toggle_or_focus_toggleterm()
-  -- Save the current buffer and exit insert mode if necessary
   if vim.fn.mode() == 'i' then
     vim.cmd 'stopinsert'
   end
-
-  -- Find if there is an open ToggleTerm window
   local term_winid = nil
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local buf = vim.api.nvim_win_get_buf(win)
@@ -16,17 +13,13 @@ local function toggle_or_focus_toggleterm()
       break
     end
   end
-
   if term_winid then
     if vim.api.nvim_get_current_win() == term_winid then
-      -- If ToggleTerm is already focused, close it
       vim.cmd 'ToggleTerm'
     else
-      -- If ToggleTerm is open but not focused, focus it
       vim.api.nvim_set_current_win(term_winid)
     end
   else
-    -- If ToggleTerm is not open, open it in a split at the bottom
     vim.cmd 'ToggleTerm direction=horizontal'
   end
 end
@@ -51,8 +44,8 @@ return {
   version = '*',
   config = function()
     require('toggleterm').setup {
-      direction = 'horizontal', -- Default split direction
-      size = 20, -- Size of the horizontal split
+      direction = 'horizontal',
+      size = 20,
     }
   end,
 }
