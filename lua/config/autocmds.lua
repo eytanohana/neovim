@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd('BufLeave', {
     local bufnr = vim.api.nvim_get_current_buf()
     local filename = vim.api.nvim_buf_get_name(bufnr)
 
-    local is_modified = vim.api.nvim_buf_get_option(bufnr, 'modified')
+    local is_modified = vim.bo[bufnr].modified
     local readable = vim.fn.filereadable(filename) == 1
     local writable = vim.fn.filewritable(filename) == 1
 
