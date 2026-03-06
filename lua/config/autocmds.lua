@@ -31,10 +31,11 @@ local qflist = vim.api.nvim_create_augroup('QuickFixList', clear)
 vim.api.nvim_create_autocmd('FileType', {
   group = qflist,
   pattern = 'qf',
-  callback = function()
-    vim.api.nvim_buf_set_keymap(0, 'n', 'J', 'j<CR>zz<C-w>j', { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(0, 'n', 'K', 'k<CR>zz<C-w>j', { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(0, 'n', 'q', 'ZQ', { noremap = true, silent = true })
+  callback = function(ev)
+    local opts = { buffer = ev.buf, silent = true }
+    vim.keymap.set('n', 'J', 'j<CR>zz<C-w>j', opts)
+    vim.keymap.set('n', 'K', 'k<CR>zz<C-w>j', opts)
+    vim.keymap.set('n', 'q', 'ZQ', opts)
   end,
 })
 

@@ -8,7 +8,7 @@ local function toggle_or_focus_toggleterm()
   local term_winid = nil
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local buf = vim.api.nvim_win_get_buf(win)
-    if vim.api.nvim_buf_get_option(buf, 'filetype') == 'toggleterm' then
+    if vim.bo[buf].filetype == 'toggleterm' then
       term_winid = win
       break
     end
@@ -27,13 +27,13 @@ end
 vim.api.nvim_create_autocmd('FileType', {
   group = toggle_term_group,
   pattern = 'toggleterm',
-  callback = function()
-    local opts = { noremap = true }
-    vim.api.nvim_buf_set_keymap(0, 't', '<A-3>', [[<C-\><C-n>:ToggleTerm<CR>]], opts)
-    vim.api.nvim_buf_set_keymap(0, 't', '<A-h>', [[<C-\><C-n><C-W>h]], opts)
-    vim.api.nvim_buf_set_keymap(0, 't', '<A-j>', [[<C-\><C-n><C-W>j]], opts)
-    vim.api.nvim_buf_set_keymap(0, 't', '<A-k>', [[<C-\><C-n><C-W>k]], opts)
-    vim.api.nvim_buf_set_keymap(0, 't', '<A-l>', [[<C-\><C-n><C-W>l]], opts)
+  callback = function(ev)
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('t', '<A-3>', [[<C-\><C-n>:ToggleTerm<CR>]], opts)
+    vim.keymap.set('t', '<A-h>', [[<C-\><C-n><C-W>h]], opts)
+    vim.keymap.set('t', '<A-j>', [[<C-\><C-n><C-W>j]], opts)
+    vim.keymap.set('t', '<A-k>', [[<C-\><C-n><C-W>k]], opts)
+    vim.keymap.set('t', '<A-l>', [[<C-\><C-n><C-W>l]], opts)
   end,
 })
 
