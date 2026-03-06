@@ -32,7 +32,6 @@ local plugins = {
 
   require 'plugins.debug',
   require 'plugins.indent_line',
-  require 'plugins.autopairs',
   require 'plugins.neotree',
   require 'plugins.toggleterm',
 

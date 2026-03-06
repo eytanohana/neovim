@@ -27,7 +27,9 @@ return {
       -- Tab: accept selected item when not in a snippet; jump forward in snippet otherwise
       ['<Tab>'] = {
         function(cmp)
-          if cmp.snippet_active() then return end
+          if cmp.snippet_active() then
+            return
+          end
           return cmp.select_and_accept()
         end,
         'snippet_forward',
@@ -41,6 +43,7 @@ return {
       nerd_font_variant = vim.g.have_nerd_font and 'mono' or 'normal',
     },
     completion = {
+      accept = { auto_brackets = { enabled = true } },
       documentation = { auto_show = false, auto_show_delay_ms = 500 },
     },
     sources = {
