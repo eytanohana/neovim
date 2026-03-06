@@ -38,11 +38,10 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-local python_group = vim.api.nvim_create_augroup('PythonGroup', clear)
 vim.api.nvim_create_autocmd('FileType', {
-  group = python_group,
+  group = vim.api.nvim_create_augroup('PythonGroup', clear),
   pattern = 'python',
   callback = function()
-    vim.cmd [[ CC ]]
+    vim.opt_local.colorcolumn = '80'
   end,
 })
