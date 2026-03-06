@@ -130,3 +130,8 @@ map('n', '<A-S-L>', '<C-i>')
 
 map('n', '<A-S-I>', ':tabmove -1<CR>', { silent = true })
 map('n', '<A-S-O>', ':tabmove +1<CR>', { silent = true })
+
+-- Close gitsigns blame from inside the blame buffer (where on_attach doesn't fire).
+map('n', '<leader>gb', function()
+  require('config.utils').close_blame()
+end)
