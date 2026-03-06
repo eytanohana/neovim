@@ -31,7 +31,7 @@ return {
         end
         vim.treesitter.start(buf, language)
         -- Treesitter-based indentation. Disable for languages where it's problematic.
-        local ts_indent_blacklist = { ruby = true, python = true }
+        local ts_indent_blacklist = { ruby = true, python = true, lua = true }
         if not ts_indent_blacklist[language] then
           vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end
