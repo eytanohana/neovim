@@ -74,8 +74,12 @@ set.startofline = false
 -- Completion menu: menuone, noinsert, noselect (blink.cmp may adjust; see plugins/completion.lua).
 set.completeopt = 'menuone,noinsert,noselect'
 
--- set undotree file directory
-set.undodir = os.getenv 'HOME' .. '/.config/nvim/.undodir'
+-- Persist undo history across sessions in the Neovim state directory
+local undodir = vim.fn.stdpath 'state' .. '/undodir'
+if vim.fn.isdirectory(undodir) == 0 then
+  vim.fn.mkdir(undodir, 'p')
+end
+set.undodir = undodir
 set.undofile = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
