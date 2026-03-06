@@ -18,11 +18,10 @@ local plugins = {
   editor_plugins[2],
   require 'plugins.git',
   require 'plugins.telescope',
+  require 'plugins.completion', -- before lsp so blink.cmp is loaded and get_lsp_capabilities() is available
   require 'plugins.lsp',
 
   require 'plugins.formatting',
-
-  require 'plugins.completion',
 
   ui_plugins[1],
   ui_plugins[2],

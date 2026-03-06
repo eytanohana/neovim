@@ -12,8 +12,8 @@ return {
     -- Useful status updates for LSP.
     { 'j-hui/fidget.nvim', opts = {} },
 
-    -- Allows extra capabilities provided by nvim-cmp
-    'hrsh7th/cmp-nvim-lsp',
+    -- blink.cmp provides LSP capabilities; load order must have completion before lsp (see config/lazy.lua)
+    'saghen/blink.cmp',
   },
   config = function()
     -- Run when an LSP attaches to a buffer (e.g. opening main.rs attaches rust_analyzer). See :help lsp-vs-treesitter
@@ -112,9 +112,8 @@ return {
       },
     }
 
-    -- Merge in nvim-cmp capabilities so LSPs support completion, signature help, etc.
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+    -- blink.cmp provides LSP capabilities (completion, signature help, etc.) internally
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
 
     -- Server configs: override cmd, filetypes, capabilities, settings per server. See :help lspconfig-all
     local lsp_util = require 'lspconfig.util'
