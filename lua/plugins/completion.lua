@@ -19,7 +19,23 @@ return {
   },
   opts = {
     keymap = {
-      preset = 'default', -- <c-y> accept, <c-n>/<c-p> next/prev, <c-space> menu, <tab>/<s-tab> snippet jump. See :h blink-cmp-config-keymap
+      preset = 'default',
+      -- Restore previous nvim-cmp–style keymaps (adapted for blink)
+      ['<C-j>'] = { 'select_next', 'fallback' },
+      ['<C-k>'] = { 'select_prev', 'fallback' },
+      ['<CR>'] = { 'accept', 'fallback' },
+      -- Tab: accept selected item when not in a snippet; jump forward in snippet otherwise
+      ['<Tab>'] = {
+        function(cmp)
+          if cmp.snippet_active() then return end
+          return cmp.select_and_accept()
+        end,
+        'snippet_forward',
+        'fallback',
+      },
+      ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+      ['<C-l>'] = { 'snippet_forward', 'fallback' },
+      ['<C-h>'] = { 'snippet_backward', 'fallback' },
     },
     appearance = {
       nerd_font_variant = vim.g.have_nerd_font and 'mono' or 'normal',
