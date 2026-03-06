@@ -89,7 +89,7 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
-      on_attach = function()
+      on_attach = function(bufnr)
         local function next_prev_hunk(func)
           return function()
             func()
