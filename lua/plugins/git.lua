@@ -8,6 +8,7 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
       topdelete = { text = '‾' },
       changedelete = { text = '~' },
     },
+    numhl = true,
     on_attach = function(bufnr)
       local gs = require 'gitsigns'
 
