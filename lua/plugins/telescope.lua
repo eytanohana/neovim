@@ -99,7 +99,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sr', builtin.oldfiles, { desc = '[S]earch [R]ecent Files' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
     vim.keymap.set('n', '?', builtin.current_buffer_fuzzy_find, { desc = '[?] Fuzzily search in current buffer' })
-    vim.keymap.set('n', '/', function()
+    vim.keymap.set('n', '<leader>/', function()
       local word = vim.fn.input '/'
       if word == '' then
         return
@@ -107,14 +107,13 @@ return { -- Fuzzy Finder (files, lsp, etc)
       require('telescope.builtin').grep_string {
         search = word,
         use_regex = true,
-        search_dirs = { vim.fn.expand '%:p' }, -- Restrict search to the current file
+        search_dirs = { vim.fn.expand '%:p' },
       }
-      -- Set the search register for `n` and `N`
       if word and word ~= '' then
         vim.fn.setreg('/', word)
-        vim.opt.hlsearch = true -- Highlight search results
+        vim.opt.hlsearch = true
       end
-    end, { desc = 'Search exact word in current buffer' })
+    end, { desc = 'Grep current buffer via Telescope' })
 
     -- It's also possible to pass additional configuration options.
     --  See `:help telescope.builtin.live_grep()` for information about particular keys
