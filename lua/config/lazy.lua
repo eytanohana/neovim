@@ -34,9 +34,6 @@ local plugins = {
   require 'plugins.indent_line',
   require 'plugins.neotree',
   require 'plugins.toggleterm',
-
-  -- Plugins from lua/custom/plugins/*.lua (add your own there). See :help lazy.nvim-structuring-your-plugins
-  { import = 'custom.plugins' },
 }
 
 local opts = {
