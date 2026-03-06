@@ -1,4 +1,4 @@
--- Editor plugins: vim-sleuth, which-key, lazydev
+-- Editor plugins: vim-sleuth, which-key (lazydev is a dependency of nvim-lspconfig)
 return {
   'tpope/vim-sleuth',
   {
@@ -25,15 +25,6 @@ return {
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
-      },
-    },
-  },
-  {
-    'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = {
-      library = {
-        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
       },
     },
   },

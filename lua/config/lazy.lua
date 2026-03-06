@@ -1,11 +1,23 @@
 local ui_plugins = require 'plugins.ui'
 local editor_plugins = require 'plugins.editor'
 local plugins = {
+  -- Load lazydev before any Lua buffer is read so lua_ls gets the Neovim API
+  -- as soon as it starts (fixes first-opened Lua file only getting text completion).
+  {
+    'folke/lazydev.nvim',
+    event = { 'BufReadPre' },
+    pattern = { '*.lua' },
+    priority = 10000,
+    opts = {
+      library = {
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+      },
+    },
+  },
   editor_plugins[1],
   editor_plugins[2],
   require 'plugins.git',
   require 'plugins.telescope',
-  editor_plugins[3],
   require 'plugins.lsp',
 
   require 'plugins.formatting',
