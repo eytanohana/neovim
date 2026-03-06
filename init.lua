@@ -8,7 +8,7 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
 -- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()` (bootstrap keymaps moved to lua/custom/keymaps.lua)
+--  See `:help vim.keymap.set()` (bootstrap keymaps in lua/config/keymaps.lua)
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
