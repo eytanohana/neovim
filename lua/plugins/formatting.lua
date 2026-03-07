@@ -26,6 +26,9 @@ return {
   opts = {
     notify_on_error = false,
     format_on_save = function(bufnr)
+      if vim.g.disable_format_on_save or vim.b[bufnr].disable_format_on_save then
+        return false
+      end
       local no_format_on_save = { c = true, cpp = true }
       if no_format_on_save[vim.bo[bufnr].filetype] then
         return false

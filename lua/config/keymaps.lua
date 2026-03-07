@@ -133,6 +133,13 @@ map('n', '<leader>td', function()
   end
 end, { desc = '[T]oggle [D]iagnostics virtual text' })
 
+-- Toggle format-on-save (global)
+map('n', '<leader>tf', function()
+  vim.g.disable_format_on_save = not vim.g.disable_format_on_save
+  local state = vim.g.disable_format_on_save and 'OFF' or 'ON'
+  vim.notify('Format-on-save ' .. state, vim.log.levels.INFO)
+end, { desc = '[T]oggle [F]ormat-on-save' })
+
 -- split navigations (M is Alt)
 map('n', '<A-j>', '<C-W>j')
 map('n', '<A-k>', '<C-W>k')
