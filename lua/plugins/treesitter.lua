@@ -3,6 +3,12 @@ return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   lazy = false,
+  dependencies = {
+    {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      lazy = true,
+    },
+  },
   config = function()
     local parsers = {
       'bash',
@@ -37,5 +43,47 @@ return {
         end
       end,
     })
+
+    -- Textobjects: function/class selection and movement (works across all TS languages)
+    require('nvim-treesitter-textobjects').setup()
+
+    local ts_select = require 'nvim-treesitter-textobjects.select'
+    local ts_move = require 'nvim-treesitter-textobjects.move'
+
+    ts_select.setup {
+      lookahead = true,
+      keymaps = {
+        ['af'] = { query = '@function.outer', desc = 'Around function' },
+        ['if'] = { query = '@function.inner', desc = 'Inside function' },
+        ['ac'] = { query = '@class.outer', desc = 'Around class' },
+        ['ic'] = { query = '@class.inner', desc = 'Inside class' },
+        ['aa'] = { query = '@parameter.outer', desc = 'Around argument' },
+        ['ia'] = { query = '@parameter.inner', desc = 'Inside argument' },
+      },
+    }
+
+    ts_move.setup {
+      goto_next_start = {
+        [']m'] = { query = '@function.outer', desc = 'Next function start' },
+        [']]'] = { query = '@class.outer', desc = 'Next class start' },
+      },
+      goto_next_end = {
+        [']M'] = { query = '@function.outer', desc = 'Next function end' },
+        [']['] = { query = '@class.outer', desc = 'Next class end' },
+      },
+      goto_previous_start = {
+        ['[m'] = { query = '@function.outer', desc = 'Prev function start' },
+        ['[['] = { query = '@class.outer', desc = 'Prev class start' },
+      },
+      goto_previous_end = {
+        ['[M'] = { query = '@function.outer', desc = 'Prev function end' },
+        ['[]'] = { query = '@class.outer', desc = 'Prev class end' },
+      },
+    }
+
+    -- Make textobject movements repeatable with ; and , (like built-in f/t)
+    local ts_repeat = require 'nvim-treesitter-textobjects.repeatable_move'
+    vim.keymap.set({ 'n', 'x', 'o' }, '<A-.>', ts_repeat.repeat_last_move_next)
+    vim.keymap.set({ 'n', 'x', 'o' }, '<A-,>', ts_repeat.repeat_last_move_previous)
   end,
 }
