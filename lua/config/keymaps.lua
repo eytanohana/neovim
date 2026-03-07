@@ -81,7 +81,7 @@ map('v', '<S-TAB>', '<gv')
 map('n', 'cp', ':let @+ = expand("%:p")<CR>:echo @+<CR>')
 
 -- copy absoulute directory path of current buffer
-map('n', 'cd', ':CP<CR>') -- todo: add CP
+map('n', 'cd', ':CopyAbsDirPath<CR>', { silent = true }) -- todo: add CP
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
