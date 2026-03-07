@@ -12,6 +12,7 @@ return {
     {
       '<leader>nr',
       function()
+        require('neotest').output_panel.clear()
         require('neotest').run.run()
       end,
       desc = 'Neotest: [R]un nearest test',
@@ -19,6 +20,7 @@ return {
     {
       '<leader>nf',
       function()
+        require('neotest').output_panel.clear()
         require('neotest').run.run(vim.fn.expand '%')
       end,
       desc = 'Neotest: Run [F]ile',
@@ -26,6 +28,7 @@ return {
     {
       '<leader>ns',
       function()
+        require('neotest').output_panel.clear()
         require('neotest').run.run { suite = true }
       end,
       desc = 'Neotest: Run [S]uite',
@@ -33,6 +36,7 @@ return {
     {
       '<leader>nl',
       function()
+        require('neotest').output_panel.clear()
         require('neotest').run.run_last()
       end,
       desc = 'Neotest: Run [L]ast',
