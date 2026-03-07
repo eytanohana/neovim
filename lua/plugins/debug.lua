@@ -45,6 +45,14 @@ return {
     }
 
     dapui.setup {
+      mappings = {
+        expand = { '<CR>', '<2-LeftMouse>', 'l', 'h' },
+        open = 'o',
+        remove = 'd',
+        edit = 'e',
+        repl = 'r',
+        toggle = 't',
+      },
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
       controls = {
         icons = {
