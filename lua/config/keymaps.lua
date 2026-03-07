@@ -121,6 +121,18 @@ map('n', 'J', 'mzJ`z')
 -- Toggle relative line numbers (under [T]oggle to avoid conflict with LSP rename on <leader>rn)
 map('n', '<leader>tn', ':set relativenumber!<CR>', { desc = '[T]oggle relative line [N]umbers' })
 
+-- Toggle diagnostics virtual text
+map('n', '<leader>td', function()
+  local cfg = vim.diagnostic.config()
+  if cfg.virtual_text then
+    vim.diagnostic.config { virtual_text = false }
+    vim.notify('Diagnostics virtual text OFF', vim.log.levels.INFO)
+  else
+    vim.diagnostic.config { virtual_text = { source = 'if_many', spacing = 2 } }
+    vim.notify('Diagnostics virtual text ON', vim.log.levels.INFO)
+  end
+end, { desc = '[T]oggle [D]iagnostics virtual text' })
+
 -- split navigations (M is Alt)
 map('n', '<A-j>', '<C-W>j')
 map('n', '<A-k>', '<C-W>k')
