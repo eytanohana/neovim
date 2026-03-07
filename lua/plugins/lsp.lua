@@ -85,7 +85,7 @@ return {
 
     -- Mason package names (use hyphen for rust-analyzer, not underscore)
     require('mason-tool-installer').setup {
-      ensure_installed = { 'stylua', 'basedpyright', 'ruff', 'rust-analyzer' },
+      ensure_installed = { 'stylua', 'basedpyright', 'ruff', 'rust-analyzer', 'debugpy' },
     }
   end,
 }

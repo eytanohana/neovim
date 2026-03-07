@@ -1,5 +1,8 @@
--- BasedPyright LSP: fast type checker and language server for Python (replaces Pyright).
+-- BasedPyright LSP: fast type checker and language server for Python.
 -- https://docs.basedpyright.com
+--
+-- Type checking set to "standard" for useful diagnostics without being overly strict.
+-- Per-project override: add pyrightconfig.json or [tool.basedpyright] in pyproject.toml.
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 return {
   cmd = { 'basedpyright-langserver', '--stdio' },
@@ -16,12 +19,14 @@ return {
   capabilities = capabilities,
   settings = {
     basedpyright = {
+      disableOrganizeImports = true, -- ruff handles import sorting
       analysis = {
         autoSearchPaths = true,
-        diagnosticMode = 'openFilesOnly',
-        -- "basic" = fewer diagnostics; use "standard" or "strict" for more. "off" = minimal.
-        typeCheckingMode = 'basic',
-        -- Do not set useLibraryCodeForTypes here; let pyproject.toml override when unset.
+        useLibraryCodeForTypes = true,
+        diagnosticMode = 'workspace',
+        typeCheckingMode = 'standard',
+        -- Auto-detect .venv, venv, etc. in the project root
+        autoImportCompletions = true,
       },
     },
   },
