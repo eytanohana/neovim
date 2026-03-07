@@ -97,7 +97,9 @@ return {
             end
             return 'python3'
           end,
-          pytest_discover_instances = true,
+          -- Disabled: runs pytest --collect-only which is very slow in large repos.
+          -- Tests are still discoverable by function name; only parametrize IDs are lost.
+          pytest_discover_instances = false,
         },
       },
       output = { open_on_run = false },

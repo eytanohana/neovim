@@ -40,3 +40,54 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Python-specific settings live in after/ftplugin/python.lua
+
+-- Large file guard: disable expensive features for files > 1 MB or 10k lines.
+-- Prevents treesitter, LSP, indent guides, and folds from freezing the editor
+-- on generated files, large fixtures, or minified code.
+local largefile = vim.api.nvim_create_augroup('LargeFile', clear)
+local largefile_threshold = 1024 * 1024 -- 1 MB
+
+vim.api.nvim_create_autocmd('BufReadPre', {
+  group = largefile,
+  callback = function(ev)
+    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(ev.buf))
+    if not ok or not stats then
+      return
+    end
+    if stats.size > largefile_threshold then
+      vim.b[ev.buf].largefile = true
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufReadPost', {
+  group = largefile,
+  callback = function(ev)
+    if not vim.b[ev.buf].largefile and vim.api.nvim_buf_line_count(ev.buf) <= 10000 then
+      return
+    end
+    vim.b[ev.buf].largefile = true
+    vim.opt_local.foldmethod = 'manual'
+    vim.opt_local.foldexpr = '0'
+    vim.opt_local.spell = false
+    vim.opt_local.swapfile = false
+    vim.opt_local.undofile = false
+
+    vim.schedule(function()
+      if not vim.api.nvim_buf_is_valid(ev.buf) then
+        return
+      end
+      pcall(vim.treesitter.stop, ev.buf)
+      -- Detach LSP clients from this buffer
+      for _, client in ipairs(vim.lsp.get_clients { bufnr = ev.buf }) do
+        vim.lsp.buf_detach_client(ev.buf, client.id)
+      end
+      -- Disable indent-blankline for this buffer
+      local ibl_ok, ibl = pcall(require, 'ibl')
+      if ibl_ok then
+        ibl.setup_buffer(ev.buf, { enabled = false })
+      end
+      vim.notify('Large file detected — treesitter, LSP, and indent guides disabled', vim.log.levels.WARN)
+    end)
+  end,
+})

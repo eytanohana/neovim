@@ -51,6 +51,23 @@ return { -- Fuzzy Finder (files, lsp, etc)
       defaults = {
         dynamic_preview_title = true,
         path_display = { 'smart' },
+        file_ignore_patterns = {
+          '%.pyc$',
+          '__pycache__/',
+          '%.mypy_cache/',
+          '%.pytest_cache/',
+          '%.ruff_cache/',
+          '%.venv/',
+          'venv/',
+          '%.tox/',
+          '%.nox/',
+          '%.eggs/',
+          '%.egg%-info/',
+          'dist/',
+          'build/',
+          'node_modules/',
+          '%.git/',
+        },
         mappings = {
           i = {
             ['<c-enter>'] = 'to_fuzzy_refine',

@@ -21,7 +21,21 @@ return {
       },
       filesystem = {
         follow_current_file = { enabled = true, leave_dirs_open = false },
-        filtered_items = { visible = true },
+        use_libuv_file_watcher = false,
+        filtered_items = {
+          visible = true,
+          never_show = {
+            '__pycache__',
+            '.mypy_cache',
+            '.pytest_cache',
+            '.ruff_cache',
+            '.tox',
+            '.nox',
+            '.eggs',
+            '*.egg-info',
+            '.DS_Store',
+          },
+        },
       },
     }
     vim.keymap.set('n', '<A-0>', ':Neotree toggle reveal_force_cwd<CR>', { silent = true })
