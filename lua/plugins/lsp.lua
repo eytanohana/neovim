@@ -3,7 +3,10 @@
 return {
   'j-hui/fidget.nvim',
   opts = {
-    notification = { override_vim_notify = true },
+    notification = {
+      override_vim_notify = true,
+      window = { relative = 'editor', align = 'top' },
+    },
   },
   dependencies = {
     { 'mason-org/mason.nvim', opts = {} },
@@ -11,6 +14,13 @@ return {
     'saghen/blink.cmp',
   },
   config = function(_, opts)
+    local default = require('fidget.notification').default_config
+    opts.notification.configs = {
+      default = vim.tbl_extend('force', default, {
+        group_style = 'DiagnosticInfo',
+        icon_style = 'String',
+      }),
+    }
     require('fidget').setup(opts)
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
