@@ -49,11 +49,15 @@ map('n', 'zx', ':set wrap!<CR>', { desc = 'Toggle text wrapping' })
 map('n', 'm', 'o<ESC>')
 map('n', 'M', 'O<ESC>')
 
--- save and quit in visual mode
-map('v', 'ZZ', '<ESC>ZZ')
+-- close current buffer (IDE-style: close tab, not Neovim)
+map({ 'n', 'v' }, 'ZZ', function()
+  vim.cmd 'w'
+  require('config.utils').close_buffer()
+end, { silent = true, desc = 'Save and close buffer' })
 
--- just quit
-map({ 'n', 'v' }, 'ZX', '<ESC>ZQ')
+map({ 'n', 'v' }, 'ZX', function()
+  require('config.utils').close_buffer { force = true }
+end, { silent = true, desc = 'Close buffer without saving' })
 
 -- move lines up/down
 map('n', '<C-j>', ':m+<CR>==')
@@ -111,7 +115,6 @@ map('n', '<A-i>', '<cmd>BufferLineCyclePrev<CR>', { silent = true, desc = 'Previ
 map('n', '<A-o>', '<cmd>BufferLineCycleNext<CR>', { silent = true, desc = 'Next buffer tab' })
 map('n', '<A-S-I>', '<cmd>BufferLineMovePrev<CR>', { silent = true, desc = 'Move buffer tab left' })
 map('n', '<A-S-O>', '<cmd>BufferLineMoveNext<CR>', { silent = true, desc = 'Move buffer tab right' })
-map('n', '<A-w>', '<cmd>bdelete<CR>', { silent = true, desc = 'Close current buffer' })
 
 -- reformat jsons
 map('n', '\\j', ':%!python -m json.tool<CR>')

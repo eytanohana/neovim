@@ -12,10 +12,16 @@ return {
         style_preset = bufferline.style_preset.default,
         themable = true,
 
-        close_command = 'bdelete! %d',
-        right_mouse_command = 'bdelete! %d',
+        close_command = function(bufnum)
+          vim.api.nvim_buf_delete(bufnum, { force = true })
+        end,
+        right_mouse_command = function(bufnum)
+          vim.api.nvim_buf_delete(bufnum, { force = true })
+        end,
         left_mouse_command = 'buffer %d',
-        middle_mouse_command = 'bdelete! %d',
+        middle_mouse_command = function(bufnum)
+          vim.api.nvim_buf_delete(bufnum, { force = true })
+        end,
 
         indicator = {
           icon = '▎',
