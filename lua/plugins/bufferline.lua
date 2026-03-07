@@ -6,22 +6,20 @@ return {
   config = function()
     local bufferline = require 'bufferline'
 
+    local function force_delete(bufnum)
+      vim.api.nvim_buf_delete(bufnum, { force = true })
+    end
+
     bufferline.setup {
       options = {
         mode = 'buffers',
         style_preset = bufferline.style_preset.default,
         themable = true,
 
-        close_command = function(bufnum)
-          vim.api.nvim_buf_delete(bufnum, { force = true })
-        end,
-        right_mouse_command = function(bufnum)
-          vim.api.nvim_buf_delete(bufnum, { force = true })
-        end,
+        close_command = force_delete,
+        right_mouse_command = force_delete,
         left_mouse_command = 'buffer %d',
-        middle_mouse_command = function(bufnum)
-          vim.api.nvim_buf_delete(bufnum, { force = true })
-        end,
+        middle_mouse_command = force_delete,
 
         indicator = {
           icon = '▎',
@@ -49,6 +47,11 @@ return {
             separator = true,
           },
         },
+
+        custom_filter = function(buf)
+          local dominated = { qf = true, help = true, prompt = true }
+          return not dominated[vim.bo[buf].buftype]
+        end,
 
         color_icons = true,
         show_buffer_icons = true,
