@@ -39,9 +39,7 @@ end
 local function add_client_block(lines, hl, client)
   local status = client_status(client)
   local status_icon = status == 'running' and '●' or status == 'starting' and '○' or '✕'
-  local status_hl = status == 'running' and 'DiagnosticOk'
-    or status == 'starting' and 'DiagnosticWarn'
-    or 'DiagnosticError'
+  local status_hl = status == 'running' and 'DiagnosticOk' or status == 'starting' and 'DiagnosticWarn' or 'DiagnosticError'
 
   append(lines, hl, string.format('  %s %s (id: %d)', status_icon, client.name, client.id), status_hl)
   append(lines, hl, string.format('    cmd:       %s', format_cmd(client)))

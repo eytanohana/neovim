@@ -2,9 +2,7 @@
 -- lazydev.nvim injects Neovim API into workspace; .luarc.json can also list runtime library.
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 local runtime = vim.env.VIMRUNTIME
-local runtime_lua = (runtime and runtime ~= '')
-    and vim.fn.fnamemodify(runtime .. '/lua', ':p')
-  or nil
+local runtime_lua = (runtime and runtime ~= '') and vim.fn.fnamemodify(runtime .. '/lua', ':p') or nil
 return {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
