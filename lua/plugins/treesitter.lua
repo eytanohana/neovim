@@ -45,8 +45,6 @@ return {
     })
 
     -- Textobjects: function/class selection and movement (works across all TS languages)
-    require('nvim-treesitter-textobjects').setup()
-
     local ts_select = require 'nvim-treesitter-textobjects.select'
     local ts_move = require 'nvim-treesitter-textobjects.move'
 
