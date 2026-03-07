@@ -35,6 +35,7 @@ local plugins = {
   require 'plugins.toggleterm',
   require 'plugins.trouble',
   require 'plugins.harpoon',
+  require 'plugins.outline',
 }
 
 local opts = {
