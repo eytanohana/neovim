@@ -106,8 +106,12 @@ map('n', '<C-A-S-L>', ':vertical resize -3<CR>')
 map('n', '<C-A-S-K>', ':resize +3<CR>')
 map('n', '<C-A-S-J>', ':resize -3<CR>')
 
-map('n', '<A-i>', 'gT')
-map('n', '<A-o>', 'gt')
+-- buffer tab navigation (bufferline)
+map('n', '<A-i>', '<cmd>BufferLineCyclePrev<CR>', { silent = true, desc = 'Previous buffer tab' })
+map('n', '<A-o>', '<cmd>BufferLineCycleNext<CR>', { silent = true, desc = 'Next buffer tab' })
+map('n', '<A-S-I>', '<cmd>BufferLineMovePrev<CR>', { silent = true, desc = 'Move buffer tab left' })
+map('n', '<A-S-O>', '<cmd>BufferLineMoveNext<CR>', { silent = true, desc = 'Move buffer tab right' })
+map('n', '<A-w>', '<cmd>bdelete<CR>', { silent = true, desc = 'Close current buffer' })
 
 -- reformat jsons
 map('n', '\\j', ':%!python -m json.tool<CR>')
@@ -127,9 +131,6 @@ map('n', 'yaa', 'ggVGy')
 
 map('n', '<A-S-H>', '<C-o>')
 map('n', '<A-S-L>', '<C-i>')
-
-map('n', '<A-S-I>', ':tabmove -1<CR>', { silent = true })
-map('n', '<A-S-O>', ':tabmove +1<CR>', { silent = true })
 
 -- Close gitsigns blame from inside the blame buffer (where on_attach doesn't fire).
 map('n', '<leader>gb', function()
