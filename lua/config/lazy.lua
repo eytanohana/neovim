@@ -27,6 +27,7 @@ local plugins = {
   require 'plugins.treesitter',
 
   require 'plugins.debug',
+  require 'plugins.test',
   require 'plugins.indent_line',
   require 'plugins.neotree',
   require 'plugins.toggleterm',

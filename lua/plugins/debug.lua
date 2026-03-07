@@ -41,7 +41,7 @@ return {
     require('mason-nvim-dap').setup {
       automatic_installation = true,
       handlers = {},
-      ensure_installed = { 'delve', 'codelldb' },
+      ensure_installed = { 'delve', 'codelldb', 'python' },
     }
 
     dapui.setup {
@@ -114,10 +114,13 @@ return {
       },
     }
 
-    -- debugpy lives outside the config repo; provision it with:
-    --   python -m venv ~/.local/share/nvim/debugpy && ~/.local/share/nvim/debugpy/bin/pip install debugpy
-    local debugpy_python = vim.fn.stdpath 'data' .. '/debugpy/bin/python'
+    -- Resolve debugpy Python: prefer Mason-managed install, fall back to legacy location.
+    -- Mason installs debugpy under its packages directory with its own venv.
+    local mason_debugpy = vim.fn.stdpath 'data' .. '/mason/packages/debugpy/venv/bin/python'
+    local legacy_debugpy = vim.fn.stdpath 'data' .. '/debugpy/bin/python'
+    local debugpy_python = vim.fn.executable(mason_debugpy) == 1 and mason_debugpy or legacy_debugpy
     require('dap-python').setup(debugpy_python)
+    require('dap-python').test_runner = 'pytest'
     require('dap-go').setup {
       delve = { detached = vim.fn.has 'win32' == 0 },
     }
