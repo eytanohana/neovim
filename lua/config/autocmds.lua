@@ -39,10 +39,4 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('PythonGroup', clear),
-  pattern = 'python',
-  callback = function()
-    vim.opt_local.colorcolumn = '80'
-  end,
-})
+-- Python-specific settings live in after/ftplugin/python.lua
