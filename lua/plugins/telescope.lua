@@ -128,5 +128,22 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sn', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[S]earch [N]eovim files' })
+
+    -- Python workflow: grep only in test files
+    vim.keymap.set('n', '<leader>sT', function()
+      builtin.live_grep {
+        prompt_title = 'Grep in Tests',
+        glob_pattern = { 'test_*.py', '*_test.py', 'tests/**/*.py', 'test/**/*.py' },
+      }
+    end, { desc = '[S]earch in [T]ests (Python)' })
+
+    -- Python workflow: grep in source, excluding test files
+    vim.keymap.set('n', '<leader>sP', function()
+      builtin.live_grep {
+        prompt_title = 'Grep in Python Source',
+        type_filter = 'py',
+        glob_pattern = { '!test_*.py', '!*_test.py', '!tests/**', '!test/**', '!conftest.py' },
+      }
+    end, { desc = '[S]earch in [P]ython source (no tests)' })
   end,
 }
