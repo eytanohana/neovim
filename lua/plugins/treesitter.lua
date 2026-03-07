@@ -82,10 +82,5 @@ return {
         ts_move[m[2]](m[3])
       end, { desc = m[4] })
     end
-
-    -- Make textobject movements repeatable with Alt-. / Alt-, (like built-in f/t)
-    local ts_repeat = require 'nvim-treesitter-textobjects.repeatable_move'
-    vim.keymap.set({ 'n', 'x', 'o' }, '<A-.>', ts_repeat.repeat_last_move_next)
-    vim.keymap.set({ 'n', 'x', 'o' }, '<A-,>', ts_repeat.repeat_last_move_previous)
   end,
 }
