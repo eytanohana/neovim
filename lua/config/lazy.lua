@@ -26,6 +26,7 @@ local plugins = {
 
   require 'plugins.treesitter',
 
+  require 'plugins.venv',
   require 'plugins.debug',
   require 'plugins.test',
   require 'plugins.indent_line',
