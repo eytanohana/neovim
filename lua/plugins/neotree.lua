@@ -32,8 +32,12 @@ return {
             '.tox',
             '.nox',
             '.eggs',
-            '*.egg-info',
             '.DS_Store',
+          },
+          never_show_by_pattern = {
+            '*.pyc',
+            '*.pyo',
+            '*.egg-info',
           },
         },
       },

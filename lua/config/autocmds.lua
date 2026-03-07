@@ -73,21 +73,24 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     vim.opt_local.swapfile = false
     vim.opt_local.undofile = false
 
-    vim.schedule(function()
-      if not vim.api.nvim_buf_is_valid(ev.buf) then
-        return
-      end
-      pcall(vim.treesitter.stop, ev.buf)
-      -- Detach LSP clients from this buffer
-      for _, client in ipairs(vim.lsp.get_clients { bufnr = ev.buf }) do
-        vim.lsp.buf_detach_client(ev.buf, client.id)
-      end
-      -- Disable indent-blankline for this buffer
-      local ibl_ok, ibl = pcall(require, 'ibl')
-      if ibl_ok then
-        ibl.setup_buffer(ev.buf, { enabled = false })
-      end
-      vim.notify('Large file detected — treesitter, LSP, and indent guides disabled', vim.log.levels.WARN)
-    end)
+    pcall(vim.treesitter.stop, ev.buf)
+
+    local ibl_ok, ibl = pcall(require, 'ibl')
+    if ibl_ok then
+      ibl.setup_buffer(ev.buf, { enabled = false })
+    end
+
+    vim.notify('Large file detected — treesitter, LSP, and indent guides disabled', vim.log.levels.WARN)
+  end,
+})
+
+-- Prevent LSP from attaching to large-file buffers. This fires at the right
+-- moment regardless of whether the client attaches before or after BufReadPost.
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = largefile,
+  callback = function(ev)
+    if vim.b[ev.buf].largefile then
+      vim.lsp.buf_detach_client(ev.buf, ev.data.client_id)
+    end
   end,
 })
