@@ -32,10 +32,15 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
         end
       end
 
+      local function reset_unstaged_hunk()
+        gs.reset_hunk()
+        close_floats()
+      end
+
       vim.keymap.set('n', '<A-S-K>', nav_and_preview 'prev', { buffer = bufnr, desc = 'Git Previous Hunk' })
       vim.keymap.set('n', '<A-S-J>', nav_and_preview 'next', { buffer = bufnr, desc = 'Git Next Hunk' })
-      vim.keymap.set('n', '<A-S-Z>', gs.reset_hunk, { buffer = bufnr, desc = 'Git Reset Hunk' })
-      vim.keymap.set('n', '<leader>gr', gs.reset_hunk, { buffer = bufnr, desc = 'Git Reset Hunk' })
+      vim.keymap.set('n', '<A-S-Z>', reset_unstaged_hunk, { buffer = bufnr, desc = 'Git Reset Hunk' })
+      vim.keymap.set('n', '<leader>gr', reset_unstaged_hunk, { buffer = bufnr, desc = 'Git Reset Hunk' })
       vim.keymap.set('n', '<leader>ga', gs.stage_hunk, { buffer = bufnr, desc = 'Git Stage/Unstage Hunk' })
 
       -- Toggle blame: close if open, otherwise open.
