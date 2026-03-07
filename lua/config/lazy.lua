@@ -31,6 +31,7 @@ local plugins = {
   require 'plugins.test',
   require 'plugins.indent_line',
   require 'plugins.neotree',
+  require 'plugins.bufferline',
   require 'plugins.toggleterm',
 }
 

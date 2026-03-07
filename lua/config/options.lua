@@ -5,7 +5,7 @@ set.tabstop = 4
 set.softtabstop = 4
 set.shiftwidth = 4
 
--- show tabs
+-- always show the tabline (bufferline.nvim renders here)
 set.showtabline = 2
 
 -- be smart when using tabs ;)
