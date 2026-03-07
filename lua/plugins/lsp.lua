@@ -2,7 +2,9 @@
 -- Server configs live in lua/lsp/*.lua; Mason installs binaries.
 return {
   'j-hui/fidget.nvim',
-  opts = {},
+  opts = {
+    notification = { override_vim_notify = true },
+  },
   dependencies = {
     { 'mason-org/mason.nvim', opts = {} },
     'WhoIsSethDaniel/mason-tool-installer.nvim',
