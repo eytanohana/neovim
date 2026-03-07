@@ -49,8 +49,14 @@ return {
         },
 
         custom_filter = function(buf)
-          local dominated = { qf = true, help = true, prompt = true }
-          return not dominated[vim.bo[buf].buftype]
+          local dominated = { qf = true, help = true, prompt = true, nofile = true }
+          if dominated[vim.bo[buf].buftype] then
+            return false
+          end
+          if vim.api.nvim_buf_get_name(buf) == '' and not vim.bo[buf].modified then
+            return false
+          end
+          return true
         end,
 
         color_icons = true,
