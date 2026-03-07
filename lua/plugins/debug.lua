@@ -17,7 +17,7 @@ return {
     local dapui = require 'dapui'
     return {
       { '<F9>', dap.continue, desc = 'Debug: Start/Continue' },
-      { '<leader>rt', dap.continue, desc = 'Debug: Start/Continue' },
+      { '<leader>dc', dap.continue, desc = '[D]ebug: [C]ontinue' },
       { '<F7>', dap.step_into, desc = 'Debug: Step Into' },
       { '<F8>', dap.step_over, desc = 'Debug: Step Over' },
       { '<S-F7>', dap.step_out, desc = 'Debug: Step Out' },
@@ -27,10 +27,13 @@ return {
         function()
           dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
         end,
-        desc = 'Debug: Set Breakpoint',
+        desc = 'Debug: Conditional Breakpoint',
       },
       { '<F6>', dapui.toggle, desc = 'Debug: Toggle DAP UI' },
-      { '<leader>du', dapui.toggle, desc = '[D]ebug: Toggle DAP [U]I' },
+      { '<leader>du', dapui.toggle, desc = '[D]ebug: Toggle [U]I' },
+      { '<leader>de', function() dapui.eval() end, desc = '[D]ebug: [E]val expression' },
+      { '<leader>dt', dap.terminate, desc = '[D]ebug: [T]erminate session' },
+      { '<leader>dC', dap.run_to_cursor, desc = '[D]ebug: Run to [C]ursor' },
       unpack(keys),
     }
   end,
@@ -98,6 +101,8 @@ return {
     end
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+    dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     dap.configurations.rust = {
       {
