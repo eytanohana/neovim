@@ -2,6 +2,9 @@
 -- Used alongside BasedPyright: ruff handles linting/formatting, basedpyright handles types/hover/completion.
 -- https://docs.astral.sh/ruff/editors/
 local capabilities = require('blink.cmp').get_lsp_capabilities()
+capabilities.general = vim.tbl_deep_extend('force', capabilities.general or {}, {
+  positionEncodings = { 'utf-16' },
+})
 
 return {
   cmd = { 'ruff', 'server' },
