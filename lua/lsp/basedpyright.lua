@@ -27,6 +27,14 @@ return {
         typeCheckingMode = 'standard',
         -- Auto-detect .venv, venv, etc. in the project root
         autoImportCompletions = true,
+        -- Suppress diagnostics that ruff handles (linting, imports, style)
+        diagnosticSeverityOverrides = {
+          reportUnusedImport = 'none',
+          reportUnusedVariable = 'none',
+          reportUnusedClass = 'none',
+          reportUnusedFunction = 'none',
+          reportUndefinedVariable = 'none', -- ruff F821
+        },
       },
     },
   },
