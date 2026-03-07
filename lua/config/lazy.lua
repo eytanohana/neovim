@@ -34,6 +34,7 @@ local plugins = {
   require 'plugins.bufferline',
   require 'plugins.toggleterm',
   require 'plugins.trouble',
+  require 'plugins.harpoon',
 }
 
 local opts = {
