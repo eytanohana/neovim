@@ -87,7 +87,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
     end, { desc = 'Search for yanked selection' })
 
     vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+    vim.keymap.set('n', '<leader>sd', function()
+      builtin.diagnostics { bufnr = 0 }
+    end, { desc = '[S]earch [D]iagnostics (buffer)' })
+    vim.keymap.set('n', '<leader>sD', builtin.diagnostics, { desc = '[S]earch [D]iagnostics (workspace)' })
     vim.keymap.set('n', '<leader>sr', builtin.oldfiles, { desc = '[S]earch [R]ecent Files' })
     vim.keymap.set('n', '<leader>s.', builtin.resume, { desc = '[S]earch Resume (reopen last picker)' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
