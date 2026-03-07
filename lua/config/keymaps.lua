@@ -103,6 +103,12 @@ map('n', '[e', function()
   vim.diagnostic.goto_prev { severity = vim.diagnostic.severity.ERROR }
 end, { desc = 'Prev error' })
 
+-- Quickfix / location list navigation
+map('n', ']q', '<cmd>cnext<CR>zz', { desc = 'Next quickfix entry' })
+map('n', '[q', '<cmd>cprev<CR>zz', { desc = 'Prev quickfix entry' })
+map('n', ']l', '<cmd>lnext<CR>zz', { desc = 'Next loclist entry' })
+map('n', '[l', '<cmd>lprev<CR>zz', { desc = 'Prev loclist entry' })
+
 -- Centered scrolling — keeps cursor in the middle of the screen when jumping
 map('n', '<C-d>', '<C-d>zz')
 map('n', '<C-u>', '<C-u>zz')
