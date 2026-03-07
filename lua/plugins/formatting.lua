@@ -33,7 +33,7 @@ return {
       local disable_lsp_fallback = { c = true, cpp = true }
       local lsp_format_opt = disable_lsp_fallback[vim.bo[bufnr].filetype] and 'never' or 'fallback'
       return {
-        timeout_ms = 500,
+        timeout_ms = 1000,
         lsp_format = lsp_format_opt,
       }
     end,
