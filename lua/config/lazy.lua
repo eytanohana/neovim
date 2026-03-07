@@ -33,6 +33,7 @@ local plugins = {
   require 'plugins.neotree',
   require 'plugins.bufferline',
   require 'plugins.toggleterm',
+  require 'plugins.trouble',
 }
 
 local opts = {

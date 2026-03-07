@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
 -- Bootstrap keymaps (moved from init.lua)
-map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- <leader>q is mapped in lua/plugins/trouble.lua (lazy-loaded)
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 map('n', '<leader>sl', ':w<CR>:luafile %<CR>', { desc = '[S]ource the current [L]ua file' })
