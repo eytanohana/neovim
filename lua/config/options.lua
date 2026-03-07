@@ -46,8 +46,8 @@ vim.schedule(function()
   set.clipboard = 'unnamedplus'
 end)
 
--- keep the cursor 2 lines from the top/bottom
-set.scrolloff = 2
+-- keep 8 lines of context visible above/below the cursor
+set.scrolloff = 8
 
 -- open new splits below and right
 set.splitbelow = true

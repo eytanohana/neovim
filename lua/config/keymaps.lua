@@ -93,8 +93,27 @@ map('n', 'cd', ':CopyAbsDirPath<CR>', { silent = true })
 --  See `:help hlsearch`
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Toggle relative line numbers. In LSP buffers, <leader>rn is buffer-local LSP rename; this global binding applies elsewhere.
-map('n', '<leader>rn', ':set relativenumber!<CR>')
+-- Diagnostic navigation
+map('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
+map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Prev diagnostic' })
+map('n', ']e', function()
+  vim.diagnostic.goto_next { severity = vim.diagnostic.severity.ERROR }
+end, { desc = 'Next error' })
+map('n', '[e', function()
+  vim.diagnostic.goto_prev { severity = vim.diagnostic.severity.ERROR }
+end, { desc = 'Prev error' })
+
+-- Centered scrolling — keeps cursor in the middle of the screen when jumping
+map('n', '<C-d>', '<C-d>zz')
+map('n', '<C-u>', '<C-u>zz')
+map('n', 'n', 'nzzzv', { desc = 'Next search result (centered)' })
+map('n', 'N', 'Nzzzv', { desc = 'Prev search result (centered)' })
+
+-- Stable cursor on line join
+map('n', 'J', 'mzJ`z')
+
+-- Toggle relative line numbers (under [T]oggle to avoid conflict with LSP rename on <leader>rn)
+map('n', '<leader>tn', ':set relativenumber!<CR>', { desc = '[T]oggle relative line [N]umbers' })
 
 -- split navigations (M is Alt)
 map('n', '<A-j>', '<C-W>j')
