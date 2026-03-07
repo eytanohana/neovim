@@ -9,7 +9,7 @@ return {
   config = function()
     require('neo-tree').setup {
       add_blank_line_at_top = true,
-      close_if_last_window = true,
+      close_if_last_window = false,
       open_files_do_not_replace_types = { 'terminal', 'Trouble', 'qf' },
       window = {
         position = 'left',

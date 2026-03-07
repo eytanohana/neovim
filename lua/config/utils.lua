@@ -10,16 +10,9 @@ function M.close_buffer(opts)
     return b ~= buf and vim.bo[b].buflisted
   end, vim.api.nvim_list_bufs())
 
-  local has_sidebar = false
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    local ft = vim.bo[vim.api.nvim_win_get_buf(win)].filetype
-    if ft == 'neo-tree' or ft == 'undotree' or ft == 'diff' then
-      has_sidebar = true
-      break
-    end
-  end
+  local is_empty = vim.api.nvim_buf_get_name(buf) == '' and not vim.bo[buf].modified
 
-  if #other_listed == 0 and not has_sidebar then
+  if is_empty and #other_listed == 0 then
     vim.cmd(opts.force and 'qa!' or 'qa')
     return
   end
