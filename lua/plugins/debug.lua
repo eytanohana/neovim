@@ -31,13 +31,7 @@ return {
       },
       { '<F6>', dapui.toggle, desc = 'Debug: Toggle DAP UI' },
       { '<leader>du', dapui.toggle, desc = '[D]ebug: Toggle [U]I' },
-      {
-        '<leader>de',
-        function()
-          dapui.eval()
-        end,
-        desc = '[D]ebug: [E]val expression',
-      },
+      { '<leader>de', dapui.eval, desc = '[D]ebug: [E]val expression' },
       { '<leader>dt', dap.terminate, desc = '[D]ebug: [T]erminate session' },
       { '<leader>dC', dap.run_to_cursor, desc = '[D]ebug: Run to [C]ursor' },
       unpack(keys),
