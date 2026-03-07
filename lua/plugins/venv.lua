@@ -5,7 +5,14 @@ return {
   dependencies = { 'nvim-telescope/telescope.nvim' },
   ft = 'python',
   keys = {
-    { '<leader>cv', '<cmd>VenvSelect<cr>', desc = '[C]ode: Select [V]env' },
+    {
+      '<leader>cv',
+      function()
+        vim.cmd 'VenvSelect'
+      end,
+      ft = 'python',
+      desc = '[C]ode: Select [V]env',
+    },
   },
   opts = {},
 }
