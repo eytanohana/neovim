@@ -23,8 +23,9 @@ return {
     end
 
     local map = vim.keymap.set
-    map('n', '<leader>a', function() harpoon:list():add() end, { desc = 'Harpoon: add file' })
-    map('n', '<leader>e', function() toggle_telescope(harpoon:list()) end, { desc = 'Harpoon: toggle menu (Telescope)' })
+    map('n', '<leader>ha', function() harpoon:list():add() end, { desc = 'Harpoon: [A]dd file' })
+    map('n', '<leader>ht', function() toggle_telescope(harpoon:list()) end, { desc = 'Harpoon: [T]elescope menu' })
+    map('n', '<leader>he', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = 'Harpoon: [E]dit list' })
 
     for i = 1, 5 do
       map('n', '<leader>' .. i, function()
