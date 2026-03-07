@@ -51,7 +51,9 @@ map('n', 'M', 'O<ESC>')
 
 -- close current buffer (IDE-style: close tab, not Neovim)
 map({ 'n', 'v' }, 'ZZ', function()
-  vim.cmd 'w'
+  if vim.api.nvim_buf_get_name(0) ~= '' then
+    vim.cmd 'w'
+  end
   require('config.utils').close_buffer()
 end, { silent = true, desc = 'Save and close buffer' })
 
