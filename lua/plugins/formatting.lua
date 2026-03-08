@@ -15,12 +15,12 @@ return {
       '<leader>ci',
       function()
         require('conform').format {
-          formatters = { 'ruff_organize_imports' },
+          formatters = { 'ruff_fix_imports', 'ruff_organize_imports' },
           async = true,
         }
       end,
       mode = 'n',
-      desc = '[C]ode: Organize [I]mports',
+      desc = '[C]ode: Clean [I]mports (remove unused + sort)',
     },
   },
   opts = {
@@ -40,6 +40,13 @@ return {
         lsp_format = lsp_format_opt,
       }
     end,
+    formatters = {
+      ruff_fix_imports = {
+        command = 'ruff',
+        args = { 'check', '--fix', '--select', 'F401', '--stdin-filename', '$FILENAME', '-' },
+        stdin = true,
+      },
+    },
     formatters_by_ft = {
       lua = { 'stylua' },
       -- ruff_organize_imports sorts and removes unused imports, then ruff_format applies formatting.

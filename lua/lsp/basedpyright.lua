@@ -35,7 +35,7 @@ return {
           reportUnusedVariable = 'none',
           reportUnusedClass = 'none',
           reportUnusedFunction = 'none',
-          reportUndefinedVariable = 'none', -- ruff F821
+          -- reportUndefinedVariable left at default so LSP code actions can offer auto-import
           -- Suppress noise from untyped third-party libraries
           reportMissingTypeStubs = 'none',
         },
