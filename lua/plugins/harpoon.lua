@@ -23,13 +23,23 @@ return {
     end
 
     local map = vim.keymap.set
-    map('n', '<leader>ha', function() harpoon:list():add() end, { desc = 'Harpoon: [A]dd file' })
-    map('n', '<leader>ht', function() toggle_telescope(harpoon:list()) end, { desc = 'Harpoon: [T]elescope menu' })
-    map('n', '<leader>he', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = 'Harpoon: [E]dit list' })
+    map('n', '<leader>ha', function()
+      harpoon:list():add()
+    end, { desc = 'Harpoon: [A]dd file' })
+    map('n', '<leader>ht', function()
+      toggle_telescope(harpoon:list())
+    end, { desc = 'Harpoon: [T]elescope menu' })
+    map('n', '<leader>he', function()
+      harpoon.ui:toggle_quick_menu(harpoon:list())
+    end, { desc = 'Harpoon: [E]dit list' })
 
-    for i = 1, 5 do
-      map('n', '<leader>' .. i, function()
-        harpoon:list():select(i)
+    for i = 1, 9 do
+      map('n', '<leader>h' .. i, function()
+        if i <= harpoon:list():length() then
+          harpoon:list():select(i)
+        else
+          vim.notify('Harpoon: no file at index ' .. i, vim.log.levels.WARN)
+        end
       end, { desc = 'Harpoon: go to file ' .. i })
     end
   end,
