@@ -27,7 +27,7 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
       local function nav_and_preview(direction)
         return function()
           close_floats()
-          gs.nav_hunk(direction)
+          gs.nav_hunk(direction, { target = 'all' })
           vim.defer_fn(gs.preview_hunk, 100)
         end
       end
