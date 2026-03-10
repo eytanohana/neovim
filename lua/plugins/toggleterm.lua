@@ -180,11 +180,11 @@ return {
 
     local trim_spaces = true
     map('n', '<leader>rt', function()
-      require('toggleterm').send_lines_to_terminal('single_line', trim_spaces, { args = vim.v.count, desc = '[R]un in [T]erminal' })
-    end)
+      require('toggleterm').send_lines_to_terminal('single_line', trim_spaces, { args = vim.v.count })
+    end, { desc = '[R]un in [T]erminal' })
 
     map('v', '<leader>rt', function()
-      require('toggleterm').send_lines_to_terminal('visual_selection', trim_spaces, { args = vim.v.count, desc = '[R]un in [T]erminal' })
-    end)
+      require('toggleterm').send_lines_to_terminal('visual_selection', trim_spaces, { args = vim.v.count })
+    end, { desc = '[R]un in [T]erminal' })
   end,
 }
