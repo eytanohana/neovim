@@ -176,7 +176,6 @@ return {
 
     map({ 'n', 'i' }, '<A-3>', toggle_or_focus_bottom_terms, { silent = true })
     map({ 'n', 'i' }, '<A-4>', open_new_terminal_right, { silent = true })
-    map({ 'n' }, '<leader>rt', open_new_terminal_right, { silent = true })
 
     local trim_spaces = true
     map('n', '<leader>rt', function()
