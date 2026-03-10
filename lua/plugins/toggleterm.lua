@@ -151,8 +151,8 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function(ev)
     local opts = { buffer = ev.buf, silent = true }
 
-    map('t', '<A-3>', toggle_or_focus_bottom_terms, opts)
-    map('t', '<A-4>', open_new_terminal_right, opts)
+    map('t', '<A-2>', toggle_or_focus_bottom_terms, opts)
+    map('t', '<A-3>', open_new_terminal_right, opts)
 
     map('t', '<A-h>', [[<Cmd>wincmd h<CR>]], opts)
     map('t', '<A-j>', [[<Cmd>wincmd j<CR>]], opts)
@@ -174,8 +174,8 @@ return {
       close_on_exit = false,
     }
 
-    map({ 'n', 'i' }, '<A-3>', toggle_or_focus_bottom_terms, { silent = true })
-    map({ 'n', 'i' }, '<A-4>', open_new_terminal_right, { silent = true })
+    map({ 'n', 'i' }, '<A-2>', toggle_or_focus_bottom_terms, { silent = true })
+    map({ 'n', 'i' }, '<A-3>', open_new_terminal_right, { silent = true })
 
     local trim_spaces = true
     map('n', '<leader>rt', function()
