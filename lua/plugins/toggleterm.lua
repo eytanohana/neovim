@@ -154,6 +154,14 @@ vim.api.nvim_create_autocmd('FileType', {
     map('t', '<A-2>', toggle_or_focus_bottom_terms, opts)
     map('t', '<A-3>', open_new_terminal_right, opts)
 
+    map({ 't', 'n' }, '<A-x>', function()
+      local buf = vim.api.nvim_get_current_buf()
+      local term_id = get_buf_term_id(buf)
+      if term_id then
+        require('toggleterm.terminal').get(term_id):shutdown()
+      end
+    end, opts)
+
     map('t', '<A-h>', [[<Cmd>wincmd h<CR>]], opts)
     map('t', '<A-j>', [[<Cmd>wincmd j<CR>]], opts)
     map('t', '<A-k>', [[<Cmd>wincmd k<CR>]], opts)
