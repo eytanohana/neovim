@@ -94,11 +94,12 @@ return {
     vim.lsp.config('ruff', require 'lsp.ruff')
     vim.lsp.config('rust_analyzer', require 'lsp.rust_analyzer')
     vim.lsp.config('lua_ls', require 'lsp.lua_ls')
-    vim.lsp.enable { 'basedpyright', 'ruff', 'rust_analyzer', 'lua_ls' }
+    vim.lsp.config('vtsls', require 'lsp.vtsls')
+    vim.lsp.enable { 'basedpyright', 'ruff', 'rust_analyzer', 'lua_ls', 'vtsls' }
 
     -- Mason package names (use hyphen for rust-analyzer, not underscore)
     require('mason-tool-installer').setup {
-      ensure_installed = { 'stylua', 'basedpyright', 'ruff', 'rust-analyzer', 'debugpy' },
+      ensure_installed = { 'stylua', 'basedpyright', 'ruff', 'rust-analyzer', 'debugpy', 'vtsls' },
     }
   end,
 }
