@@ -70,11 +70,9 @@ end
 local function next_terminal_id()
   local max_id = 0
 
-  local ok, terminals = pcall(function()
-    return require('toggleterm.terminal').get_all()
-  end)
+  local terminals = require('toggleterm.terminal').get_all()
 
-  if ok and terminals then
+  if terminals then
     for _, term in ipairs(terminals) do
       local id = term.id or term.count
       if id and id > max_id then
