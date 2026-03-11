@@ -70,15 +70,6 @@ end
 local function next_terminal_id()
   local max_id = 0
 
-  for _, win in ipairs(get_toggleterm_wins()) do
-    local buf = vim.api.nvim_win_get_buf(win)
-    local term_id = get_buf_term_id(buf)
-    if term_id and term_id > max_id then
-      max_id = term_id
-    end
-  end
-
-  -- also check existing hidden terminals if available
   local ok, terminals = pcall(function()
     return require('toggleterm.terminal').get_all()
   end)
