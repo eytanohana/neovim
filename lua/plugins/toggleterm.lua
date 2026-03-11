@@ -126,6 +126,7 @@ local function open_new_terminal_right()
   if not current_win_is_toggleterm() then
     focus_last_focused_term()
     stop_insert_if_needed()
+    return
   end
 
   local id = next_terminal_id()
