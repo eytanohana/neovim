@@ -170,7 +170,7 @@ return {
       size = 20,
       persist_mode = true,
       persist_size = true,
-      start_in_insert = true,
+      start_in_insert = false,
       close_on_exit = false,
     }
 
