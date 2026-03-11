@@ -15,6 +15,7 @@ return {
       'c',
       'diff',
       'html',
+      'json',
       'lua',
       'luadoc',
       'markdown',
