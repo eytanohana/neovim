@@ -84,10 +84,10 @@ map('v', '<TAB>', '>gv')
 map('v', '<S-TAB>', '<gv')
 
 -- copy paths of current buffer
-map('n', 'cp', ':CopyAbsFilePath<CR>', { silent = true, desc = 'Copy absolute file path' })
-map('n', 'cd', ':CopyAbsDirPath<CR>', { silent = true, desc = 'Copy absolute dir path' })
-map('n', 'crp', ':CopyRelFilePath<CR>', { silent = true, desc = 'Copy relative file path' })
-map('n', 'crd', ':CopyRelDirPath<CR>', { silent = true, desc = 'Copy relative dir path' })
+map('n', 'cP', ':CopyAbsFilePath<CR>', { silent = true, desc = 'Copy absolute file path' })
+map('n', 'cD', ':CopyAbsDirPath<CR>', { silent = true, desc = 'Copy absolute dir path' })
+map('n', 'cp', ':CopyRelFilePath<CR>', { silent = true, desc = 'Copy relative file path' })
+map('n', 'cd', ':CopyRelDirPath<CR>', { silent = true, desc = 'Copy relative dir path' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
