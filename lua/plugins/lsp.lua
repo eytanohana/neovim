@@ -12,6 +12,15 @@ return {
     { 'mason-org/mason.nvim', opts = {} },
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     'saghen/blink.cmp',
+    {
+      'folke/lazydev.nvim',
+      ft = 'lua',
+      opts = {
+        library = {
+          { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        },
+      },
+    },
   },
   config = function(_, opts)
     local default = require('fidget.notification').default_config

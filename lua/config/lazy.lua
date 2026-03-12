@@ -1,15 +1,6 @@
 local ui_plugins = require 'plugins.ui'
 local editor_plugins = require 'plugins.editor'
 local plugins = {
-  {
-    'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = {
-      library = {
-        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-      },
-    },
-  },
   editor_plugins[1],
   editor_plugins[2],
   require 'plugins.git',

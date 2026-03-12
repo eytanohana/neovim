@@ -1,4 +1,4 @@
--- Editor plugins: vim-sleuth, which-key (lazydev loads in config/lazy.lua for Lua buffers so lua_ls gets Neovim API)
+-- Editor plugins: vim-sleuth, which-key
 return {
   'tpope/vim-sleuth',
   {
