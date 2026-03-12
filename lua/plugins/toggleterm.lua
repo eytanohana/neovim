@@ -152,6 +152,8 @@ vim.api.nvim_create_autocmd('FileType', {
       end
     end, opts)
 
+    map('t', '<A-n>', [[<C-\><C-n>]], opts)
+
     map('t', '<A-h>', [[<Cmd>wincmd h<CR>]], opts)
     map('t', '<A-j>', [[<Cmd>wincmd j<CR>]], opts)
     map('t', '<A-k>', [[<Cmd>wincmd k<CR>]], opts)
