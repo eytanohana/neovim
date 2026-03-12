@@ -1,22 +1,10 @@
-local ui_plugins = require 'plugins.ui'
-local editor_plugins = require 'plugins.editor'
 local plugins = {
-  editor_plugins[1],
-  editor_plugins[2],
   require 'plugins.git',
   require 'plugins.telescope',
   require 'plugins.completion', -- before lsp so blink.cmp is loaded and get_lsp_capabilities() is available
   require 'plugins.lsp',
-
   require 'plugins.formatting',
-
-  ui_plugins[1],
-  ui_plugins[2],
-  ui_plugins[3],
-  ui_plugins[4],
-
   require 'plugins.treesitter',
-
   require 'plugins.venv',
   require 'plugins.debug',
   require 'plugins.test',
@@ -28,6 +16,9 @@ local plugins = {
   require 'plugins.harpoon',
   require 'plugins.outline',
 }
+
+vim.list_extend(plugins, require 'plugins.ui')
+vim.list_extend(plugins, require 'plugins.editor')
 
 local opts = {
   rocks = { enabled = false },
