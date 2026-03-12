@@ -33,7 +33,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     error('Error cloning lazy.nvim:\n' .. out)
   end
-end ---@diagnostic disable-next-line: undefined-field
+end
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
@@ -48,6 +48,7 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins. Plugin table lives in lua/config/lazy.lua.
 local plugins, opts = require 'config.lazy'
+---@diagnostic disable-next-line: param-type-mismatch
 require('lazy').setup(plugins, opts)
 
 -- [[ Options ]]
