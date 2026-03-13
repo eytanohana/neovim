@@ -86,6 +86,7 @@ end
 
 local function toggle_or_focus_bottom_terms()
   stop_insert_if_needed()
+  vim.cmd 'silent! wall'
 
   local term_wins = get_toggleterm_wins()
 
@@ -104,6 +105,7 @@ end
 
 local function open_new_terminal_right()
   stop_insert_if_needed()
+  vim.cmd 'silent! wall'
 
   local term_wins = get_toggleterm_wins()
 
