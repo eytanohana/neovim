@@ -32,17 +32,32 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
         end
       end
 
+      local function refresh_neotree()
+        require('neo-tree.sources.manager').refresh 'filesystem'
+      end
+
       local function reset_unstaged_hunk()
         gs.reset_hunk()
         close_floats()
+        refresh_neotree()
+      end
+
+      local function stage_hunk()
+        gs.stage_hunk()
+        refresh_neotree()
+      end
+
+      local function stage_buffer()
+        gs.stage_buffer()
+        refresh_neotree()
       end
 
       vim.keymap.set('n', '<A-S-K>', nav_and_preview 'prev', { buffer = bufnr, desc = 'Git Previous Hunk' })
       vim.keymap.set('n', '<A-S-J>', nav_and_preview 'next', { buffer = bufnr, desc = 'Git Next Hunk' })
       vim.keymap.set('n', '<A-S-Z>', reset_unstaged_hunk, { buffer = bufnr, desc = 'Git Reset Hunk' })
       vim.keymap.set('n', '<leader>gr', reset_unstaged_hunk, { buffer = bufnr, desc = 'Git Reset Hunk' })
-      vim.keymap.set('n', '<leader>gap', gs.stage_hunk, { buffer = bufnr, desc = 'Git Stage/Unstage Patch' })
-      vim.keymap.set('n', '<leader>gaa', gs.stage_buffer, { buffer = bufnr, desc = 'Git Stage File' })
+      vim.keymap.set('n', '<leader>gap', stage_hunk, { buffer = bufnr, desc = 'Git Stage/Unstage Patch' })
+      vim.keymap.set('n', '<leader>gaa', stage_buffer, { buffer = bufnr, desc = 'Git Stage File' })
       vim.keymap.set('n', '<leader>gp', gs.preview_hunk_inline, { buffer = bufnr, desc = 'Git Preview Hunk' })
 
       -- Toggle blame: close if open, otherwise open.
