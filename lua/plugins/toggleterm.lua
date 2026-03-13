@@ -86,7 +86,6 @@ end
 
 local function toggle_or_focus_bottom_terms()
   stop_insert_if_needed()
-  vim.cmd 'silent! wall'
 
   local term_wins = get_toggleterm_wins()
 
@@ -105,7 +104,6 @@ end
 
 local function open_new_terminal_right()
   stop_insert_if_needed()
-  vim.cmd 'silent! wall'
 
   local term_wins = get_toggleterm_wins()
 
@@ -130,6 +128,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'TermEnter' }, {
     if not is_toggleterm_buf(ev.buf) then
       return
     end
+    vim.cmd 'silent! wall'
     local term_id = get_buf_term_id(ev.buf)
     if term_id then
       state.last_focused_term_id = term_id
