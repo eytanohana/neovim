@@ -142,7 +142,7 @@ vim.api.nvim_create_autocmd('FileType', {
     local opts = { buffer = ev.buf, silent = true }
 
     map('t', '<A-2>', toggle_or_focus_bottom_terms, opts)
-    map('t', '<A-3>', open_new_terminal_right, opts)
+    map('t', '<A-4>', open_new_terminal_right, opts)
 
     map({ 't', 'n' }, '<A-x>', function()
       local buf = vim.api.nvim_get_current_buf()
@@ -175,7 +175,7 @@ return {
     }
 
     map({ 'n', 'i' }, '<A-2>', toggle_or_focus_bottom_terms, { silent = true })
-    map({ 'n', 'i' }, '<A-3>', open_new_terminal_right, { silent = true })
+    map({ 'n', 'i' }, '<A-4>', open_new_terminal_right, { silent = true })
 
     local trim_spaces = true
     map('n', '<leader>rt', function()
