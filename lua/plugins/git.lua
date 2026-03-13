@@ -32,24 +32,20 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
         end
       end
 
-      local function refresh_neotree()
-        require('neo-tree.sources.manager').refresh 'filesystem'
-      end
-
       local function reset_unstaged_hunk()
         gs.reset_hunk()
         close_floats()
-        refresh_neotree()
+        require('config.utils').refresh_neotree()
       end
 
       local function stage_hunk()
         gs.stage_hunk()
-        refresh_neotree()
+        require('config.utils').refresh_neotree()
       end
 
       local function stage_buffer()
         gs.stage_buffer()
-        refresh_neotree()
+        require('config.utils').refresh_neotree()
       end
 
       vim.keymap.set('n', '<A-S-K>', nav_and_preview 'prev', { buffer = bufnr, desc = 'Git Previous Hunk' })

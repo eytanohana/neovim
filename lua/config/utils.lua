@@ -53,4 +53,8 @@ function M.close_blame()
   return found
 end
 
+function M.refresh_neotree()
+  require('neo-tree.sources.manager').refresh 'filesystem'
+end
+
 return M
