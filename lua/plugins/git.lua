@@ -41,7 +41,8 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
       vim.keymap.set('n', '<A-S-J>', nav_and_preview 'next', { buffer = bufnr, desc = 'Git Next Hunk' })
       vim.keymap.set('n', '<A-S-Z>', reset_unstaged_hunk, { buffer = bufnr, desc = 'Git Reset Hunk' })
       vim.keymap.set('n', '<leader>gr', reset_unstaged_hunk, { buffer = bufnr, desc = 'Git Reset Hunk' })
-      vim.keymap.set('n', '<leader>ga', gs.stage_hunk, { buffer = bufnr, desc = 'Git Stage/Unstage Hunk' })
+      vim.keymap.set('n', '<leader>gap', gs.stage_hunk, { buffer = bufnr, desc = 'Git Stage/Unstage Patch' })
+      vim.keymap.set('n', '<leader>gaa', gs.stage_buffer, { buffer = bufnr, desc = 'Git Stage File' })
       vim.keymap.set('n', '<leader>gp', gs.preview_hunk_inline, { buffer = bufnr, desc = 'Git Preview Hunk' })
 
       -- Toggle blame: close if open, otherwise open.
