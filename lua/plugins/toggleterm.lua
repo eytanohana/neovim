@@ -129,6 +129,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'TermEnter' }, {
       return
     end
     vim.cmd 'silent! wall'
+    require('config.utils').refresh_neotree()
     local term_id = get_buf_term_id(ev.buf)
     if term_id then
       state.last_focused_term_id = term_id
