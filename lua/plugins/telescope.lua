@@ -93,7 +93,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
       builtin.diagnostics { bufnr = 0 }
     end, { desc = '[S]earch [D]iagnostics (buffer)' })
     vim.keymap.set('n', '<leader>sD', builtin.diagnostics, { desc = '[S]earch [D]iagnostics (workspace)' })
-    vim.keymap.set('n', '<leader>sr', '<cmd>Telescope frecency<cr>', { desc = '[S]earch [R]ecent Files (frecency)' })
+    vim.keymap.set('n', '<leader>sr', '<cmd>Telescope frecency workspace=CWD<cr>', { desc = '[S]earch [R]ecent Files (frecency, cwd only)' })
     vim.keymap.set('n', '<leader>s.', builtin.resume, { desc = '[S]earch Resume (reopen last picker)' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
     vim.keymap.set('n', '?', builtin.current_buffer_fuzzy_find, { desc = '[?] Fuzzily search in current buffer' })
