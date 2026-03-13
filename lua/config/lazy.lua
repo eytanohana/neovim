@@ -15,6 +15,7 @@ local plugins = {
   require 'plugins.trouble',
   require 'plugins.harpoon',
   require 'plugins.outline',
+  require 'plugins.markdown_tables',
 }
 
 vim.list_extend(plugins, require 'plugins.ui')
