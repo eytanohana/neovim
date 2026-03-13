@@ -122,14 +122,13 @@ local function open_new_terminal_right()
   vim.cmd(('%dToggleTerm direction=horizontal'):format(id))
 end
 
-vim.api.nvim_create_autocmd({ 'TermEnter' }, {
+vim.api.nvim_create_autocmd({ 'BufEnter', 'TermEnter' }, {
   group = group,
   callback = function(ev)
     if not is_toggleterm_buf(ev.buf) then
       return
     end
     vim.cmd 'silent! wall'
-    require('config.utils').refresh_neotree()
     local term_id = get_buf_term_id(ev.buf)
     if term_id then
       state.last_focused_term_id = term_id
