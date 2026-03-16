@@ -9,6 +9,12 @@ return {
   config = function()
     require('neo-tree').setup {
       add_blank_line_at_top = true,
+      default_component_configs = {
+        diagnostics = {
+          symbols = { hint = '', info = '', warn = '', error = '' },
+          highlights = { hint = 'None', info = 'None', warn = 'None', error = 'None' },
+        },
+      },
       close_if_last_window = false,
       open_files_do_not_replace_types = { 'terminal', 'Trouble', 'qf' },
       window = {
