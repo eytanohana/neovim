@@ -61,6 +61,9 @@ map({ 'n', 'v' }, 'ZX', function()
   require('config.utils').close_buffer { force = true }
 end, { silent = true, desc = 'Close buffer without saving' })
 
+-- Save all writeable buffers and quit Neovim
+map('n', '<leader>wq', '<cmd>wqa<CR>', { silent = true, desc = '[W]rite all and [Q]uit' })
+
 -- move lines up/down
 map('n', '<C-j>', ':m+<CR>==')
 map('n', '<C-k>', ':m-2<CR>==') -- todo: clashes with signature help
