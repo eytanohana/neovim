@@ -1,8 +1,22 @@
--- Rich in-buffer Markdown rendering (icons, code blocks, tables, callouts).
--- See https://github.com/MeanderingProgrammer/render-markdown.nvim
--- Optional: `:TSInstall latex` after installing the `tree-sitter` CLI for formula rendering.
+-- Markdown: table editing, in-buffer rendering (render-markdown.nvim).
 return {
   {
+    'Kicamon/markdown-table-mode.nvim',
+    config = function()
+      require('markdown-table-mode').setup()
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = '*markdown',
+        callback = function()
+          vim.cmd 'Mtm'
+        end,
+      })
+    end,
+  },
+  {
+    -- Rich in-buffer Markdown rendering (icons, code blocks, tables, callouts).
+    -- See https://github.com/MeanderingProgrammer/render-markdown.nvim
+    -- Optional: `:TSInstall latex` after installing the `tree-sitter` CLI for formula rendering.
     'MeanderingProgrammer/render-markdown.nvim',
     ft = { 'markdown' },
     dependencies = {
