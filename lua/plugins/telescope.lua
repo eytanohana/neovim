@@ -24,8 +24,36 @@ return { -- Fuzzy Finder (files, lsp, etc)
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
   },
   config = function()
+    --- Prefer the main editor split when the picker was opened from ToggleTerm (or any terminal),
+    --- so files open in bufferline instead of replacing the terminal buffer.
+    local function pick_largest_normal_window()
+      local best_win, best_area = nil, 0
+      for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+        local buf = vim.api.nvim_win_get_buf(win)
+        local bo = vim.bo[buf]
+        if bo.buftype == '' and bo.filetype ~= 'toggleterm' then
+          local area = vim.api.nvim_win_get_width(win) * vim.api.nvim_win_get_height(win)
+          if area > best_area then
+            best_area, best_win = area, win
+          end
+        end
+      end
+      return best_win
+    end
+
     require('telescope').setup {
       defaults = {
+        get_selection_window = function(picker, _entry)
+          local orig = picker.original_win_id
+          if vim.api.nvim_win_is_valid(orig) then
+            local buf = vim.api.nvim_win_get_buf(orig)
+            local bo = vim.bo[buf]
+            if bo.buftype == '' and bo.filetype ~= 'toggleterm' then
+              return 0
+            end
+          end
+          return pick_largest_normal_window() or 0
+        end,
         dynamic_preview_title = true,
         path_display = { 'smart' },
         file_ignore_patterns = {
