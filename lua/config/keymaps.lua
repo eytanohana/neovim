@@ -165,8 +165,15 @@ map('n', '<A-o>', '<cmd>BufferLineCycleNext<CR>', { silent = true, desc = 'Next 
 map('n', '<A-S-I>', '<cmd>BufferLineMovePrev<CR>', { silent = true, desc = 'Move buffer tab left' })
 map('n', '<A-S-O>', '<cmd>BufferLineMoveNext<CR>', { silent = true, desc = 'Move buffer tab right' })
 
--- reformat jsons
-map('n', '\\j', ':%!python -m json.tool<CR>')
+-- Format JSON (same as <leader>f: Conform + jq). Falls back to python if not json.
+map('n', '\\j', function()
+  local ft = vim.bo.filetype
+  if ft == 'json' then
+    require('conform').format { async = true, lsp_format = 'never' }
+  else
+    vim.cmd ':%!python3 -m json.tool'
+  end
+end, { desc = 'Format JSON (jq) or run json.tool on buffer' })
 
 -- dont copy pasted over text
 map('v', 'p', '"_dP')
