@@ -49,6 +49,7 @@ return {
         { '<leader>g', group = '[G]it' },
         { '<leader>h', group = '[H]arpoon' },
         { '<leader>n', group = 'Neotest', icon = '🧪' },
+        { '<leader>m', group = '[M]arkdown', icon = '📝' },
       },
     },
   },
