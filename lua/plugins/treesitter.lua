@@ -26,7 +26,7 @@ return {
       'python',
       'yaml', -- optional: render-markdown.nvim frontmatter
     }
-    require('nvim-treesitter.install').ensure_installed(parsers)
+    require('nvim-treesitter.install').install(parsers)
     vim.api.nvim_create_autocmd('FileType', {
       callback = function(args)
         local buf, filetype = args.buf, args.match
