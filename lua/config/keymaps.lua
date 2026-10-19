@@ -195,3 +195,6 @@ map('n', '<A-S-L>', '<C-i>')
 map('n', '<leader>gb', function()
   require('config.utils').close_blame()
 end)
+
+-- Visual /: open the search prompt prefilled with the selection (literal match).
+map('x', '/', [["zy/\V<C-r>=substitute(escape(@z, '/\'), "\n", '\\n', 'g')<CR>]], { desc = 'Search for selection' })
